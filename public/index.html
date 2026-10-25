@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Art Studio</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="pottery.css">
+</head>
+<body>
+  <header class="header">
+    <a href="#" class="logo" onclick="showPage('home')">
+      art studio<span>.</span><small>by gdgc.vnrvjiet</small>
+    </a>
+
+    <nav>
+      <button onclick="showPage('home')">Paintings</button>
+
+      <button id="wallPaintingLink" onclick="showPage('mural')">
+        Wall Painting
+        <span id="wallPaintingBadge" class="nav-count hidden">0</span>
+      </button>
+
+      <button id="potteryLink" onclick="showPotteryPage()">
+        Pottery
+        <span id="potteryBadge" class="nav-count hidden">0</span>
+      </button>
+
+      <button id="ordersLink" class="hidden" onclick="showPage('orders')">
+        My orders
+        <span id="ordersBadge" class="nav-count hidden">0</span>
+      </button>
+
+      <button id="accountLink" class="nav-button" onclick="showPage('account')">
+        Login / Sign up
+      </button>
+
+      <button id="logoutButton" class="hidden" onclick="logout()">
+        Log out
+      </button>
+    </nav>
+  </header>
+
+  <main>
+    <section id="homePage">
+      <section class="hero">
+        <div class="hero-text">
+          <p class="small-heading">ART FOR YOUR EVERYDAY</p>
+          <h1>Make room for<br><i>something beautiful.</i></h1>
+          <p class="intro">
+            Original paintings made to bring a little more colour, calm and character into your space.
+          </p>
+          <button class="main-button" onclick="document.getElementById('gallery').scrollIntoView({behavior:'smooth'})">
+            Explore paintings ↘
+          </button>
+        </div>
+
+        <div class="hero-picture">
+          <div class="circle"></div>
+          <div class="arch"></div>
+          <div class="leaf"></div>
+          <div class="picture-caption">ORIGINAL ART<br>MADE WITH CARE</div>
+        </div>
+      </section>
+
+      <section id="gallery" class="gallery-section">
+        <div class="section-title">
+          <div>
+            <p class="small-heading">THE COLLECTION</p>
+            <h2>Find your favourite.</h2>
+          </div>
+          <p id="paintingCount">Original works</p>
+        </div>
+
+        <p id="message" class="message hidden"></p>
+
+        <div class="gallery-controls">
+          <input
+            type="text"
+            id="searchPainting"
+            placeholder="Search by painting title or artist..."
+          >
+
+          <select id="availabilityFilter">
+            <option value="all">All paintings</option>
+            <option value="available">Available paintings</option>
+            <option value="sold">Sold paintings</option>
+          </select>
+        </div>
+
+        <div id="paintings" class="paintings">
+          <p>Loading paintings...</p>
+        </div>
+      </section>
+    </section>
+
+    <section id="accountPage" class="content-page hidden">
+      <p class="small-heading">YOUR STUDIO ACCOUNT</p>
+      <h2 id="accountTitle">Welcome back.</h2>
+
+      <form id="accountForm" class="form">
+        <label id="nameLabel" class="hidden">
+          Your name
+          <input id="name" type="text" minlength="2">
+        </label>
+
+        <label>
+          Email address
+          <input id="email" type="email" required>
+        </label>
+
+        <label>
+          Password
+          <input id="password" type="password" minlength="8" required>
+        </label>
+
+        <button class="main-button" type="submit" id="submitAccount">
+          Log in
+        </button>
+      </form>
+
+      <p class="switch-text" id="switchText">
+        New here?
+        <button type="button" onclick="switchAccount()">Create an account</button>
+      </p>
+
+      <p class="hint">
+        New accounts are customers. The studio admin account is configured privately on the server.
+      </p>
+    </section>
+
+    <section id="muralPage" class="content-page hidden">
+      <p class="small-heading">CUSTOM WALL ART</p>
+      <h2>Wall painting bookings.</h2>
+
+      <p class="intro mural-intro">
+        Bring your walls to life with a custom mural. Send a request and our studio will confirm the booking.
+      </p>
+
+      <p class="hint">
+        Bookings must be 7–90 days in advance. Wall size: 10–500 sq. ft.
+        Estimated price: ₹150 per sq. ft. You can cancel up to 3 days before your booking.
+      </p>
+
+      <p id="muralMessage" class="message hidden" role="status"></p>
+      <div id="muralFormArea"></div>
+
+      <h2 class="mural-subheading" id="muralListTitle">
+        My wall bookings.
+      </h2>
+
+      <div id="muralBookingsList">
+        <p>Log in to view bookings.</p>
+      </div>
+    </section>
+
+    <section id="potteryPage" class="content-page hidden">
+      <p class="small-heading">MADE BY HAND</p>
+      <h2>Pottery requests.</h2>
+
+      <p class="intro pottery-intro">
+        Choose a handmade pottery piece, select your favourite glaze,
+        and tell us when you need it.
+      </p>
+
+      <p class="hint">
+        Quantity: 1–12 items per request. Your needed-by date must be at least
+        14 days in advance. The studio will review your request.
+      </p>
+
+      <div id="potteryMessage" class="message hidden" role="status"></div>
+
+      <div id="potteryFormArea">
+        <p>Loading pottery options...</p>
+      </div>
+
+      <h2 class="pottery-subheading" id="potteryListTitle">
+        My pottery requests.
+      </h2>
+
+      <div id="potteryRequestsList">
+        <p>Log in to view pottery requests.</p>
+      </div>
+    </section>
+
+    <section id="ordersPage" class="content-page hidden">
+      <p class="small-heading">YOUR STUDIO</p>
+      <h2 id="ordersTitle">My orders.</h2>
+      <div id="adminFormArea"></div>
+      <div id="ordersList"><p>Loading orders...</p></div>
+    </section>
+  </main>
+
+  <!-- Theme-matched confirmation popup -->
+  <div
+    id="studioConfirmModal"
+    class="studio-modal hidden"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="studioConfirmTitle"
+  >
+    <div class="studio-modal-backdrop" data-modal-close></div>
+
+    <div class="studio-modal-panel">
+      <p class="small-heading">ART STUDIO</p>
+      <h2 id="studioConfirmTitle">Are you sure?</h2>
+      <p id="studioConfirmText">Please confirm your choice.</p>
+
+      <div class="studio-modal-actions">
+        <button
+          type="button"
+          id="studioConfirmCancel"
+          class="studio-modal-cancel"
+        >
+          Cancel
+        </button>
+
+        <button
+          type="button"
+          id="studioConfirmAccept"
+          class="main-button"
+        >
+          Confirm
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <style>
+    /* Navigation count badges */
+    .nav-count {
+      display: inline-flex;
+      min-width: 18px;
+      height: 18px;
+      align-items: center;
+      justify-content: center;
+      margin-left: 5px;
+      padding: 0 5px;
+      border-radius: 999px;
+      background: #a6684a;
+      color: #fff;
+      font-size: 10px;
+      line-height: 1;
+      vertical-align: middle;
+    }
+
+    .nav-count.hidden {
+      display: none !important;
+    }
+
+    /* Confirmation modal */
+    .studio-modal {
+      position: fixed;
+      inset: 0;
+      z-index: 10000;
+      display: grid;
+      place-items: center;
+      padding: 20px;
+    }
+
+    .studio-modal.hidden {
+      display: none !important;
+    }
+
+    .studio-modal-backdrop {
+      position: absolute;
+      inset: 0;
+      background: rgba(34, 30, 26, 0.42);
+      backdrop-filter: blur(3px);
+    }
+
+    .studio-modal-panel {
+      position: relative;
+      width: min(100%, 390px);
+      padding: 30px;
+      background: #f8f7f3;
+      border: 1px solid #e5ddd2;
+      border-radius: 5px;
+      box-shadow: 0 20px 60px rgba(34, 30, 26, 0.2);
+      animation: art-studio-modal-in 0.18s ease-out;
+    }
+
+    .studio-modal-panel .small-heading {
+      margin-bottom: 12px;
+    }
+
+    .studio-modal-panel h2 {
+      margin: 0 0 10px;
+      color: #292a24;
+      font: 400 28px/1.2 'Playfair Display', Georgia, serif;
+    }
+
+    .studio-modal-panel > p:not(.small-heading) {
+      margin: 0;
+      color: #77766e;
+      font-size: 13px;
+      line-height: 1.7;
+    }
+
+    .studio-modal-actions {
+      display: flex;
+      justify-content: flex-end;
+      gap: 10px;
+      margin-top: 24px;
+    }
+
+    .studio-modal-actions button {
+      min-height: 40px;
+      padding: 10px 16px;
+      border-radius: 3px;
+      font: 500 12px 'DM Sans', sans-serif;
+      cursor: pointer;
+    }
+
+    .studio-modal-cancel {
+      border: 1px solid #d9d3c9;
+      background: transparent;
+      color: #504d45;
+    }
+
+    .studio-modal-cancel:hover {
+      background: #eee8df;
+    }
+
+    .studio-modal-actions .main-button {
+      margin: 0;
+    }
+
+    @keyframes art-studio-modal-in {
+      from {
+        opacity: 0;
+        transform: translateY(6px) scale(0.985);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .studio-modal-panel {
+        animation: none;
+      }
+    }
+  </style>
+
+  <footer>
+    <span>ART STUDIO</span>
+    <span>Original works. Thoughtfully made.</span>
+    <span>© 2026</span>
+  </footer>
+
+  <script src="app.js"></script>
+  <script src="pottery.js"></script>
+</body>
+</html>

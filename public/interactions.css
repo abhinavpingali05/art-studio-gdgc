@@ -1,0 +1,223 @@
+/* Refined interaction states */
+button,
+.buy-button,
+.header nav button,
+.switch-text button,
+.text-button {
+  -webkit-tap-highlight-color: transparent;
+  transition:
+    background-color 180ms ease,
+    color 180ms ease,
+    border-color 180ms ease,
+    box-shadow 180ms ease,
+    transform 180ms ease,
+    opacity 180ms ease;
+}
+
+button:not(:disabled) {
+  cursor: pointer;
+}
+
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+  outline: 2px solid #a6684a;
+  outline-offset: 3px;
+}
+
+.main-button,
+.admin-form button,
+.mural-form button,
+.mural-actions button,
+.order button,
+#accountForm button[type="submit"] {
+  border-radius: 3px;
+}
+
+.main-button,
+#accountForm button[type="submit"] {
+  box-shadow: 0 3px 0 rgba(41, 42, 36, 0.08);
+}
+
+.main-button:hover:not(:disabled),
+#accountForm button[type="submit"]:hover:not(:disabled),
+.admin-form button:hover:not(:disabled) {
+  background: #a6684a;
+  box-shadow: 0 5px 14px rgba(93, 59, 40, 0.14);
+  transform: translateY(-2px);
+}
+
+button:active:not(:disabled),
+.buy-button:active:not(:disabled) {
+  transform: translateY(1px) scale(0.99);
+  box-shadow: none;
+}
+
+button:disabled {
+  cursor: not-allowed;
+  opacity: 0.58;
+}
+
+.buy-button:hover:not(:disabled) {
+  box-shadow: 0 5px 16px rgba(41, 42, 36, 0.06);
+  transform: translateY(-2px);
+}
+
+.header nav button:not(.nav-button):hover {
+  color: #a6684a;
+}
+
+.header nav .nav-button:hover {
+  background: #a6684a;
+  transform: translateY(-1px);
+}
+
+.form input,
+.form textarea,
+.form select,
+.mural-form input,
+.mural-form textarea,
+.gallery-controls input,
+.gallery-controls select {
+  border-radius: 3px;
+  transition: border-color 180ms ease, box-shadow 180ms ease;
+}
+
+.form input:focus,
+.form textarea:focus,
+.form select:focus,
+.mural-form input:focus,
+.mural-form textarea:focus {
+  border-color: #a6684a;
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(166, 104, 74, 0.12);
+}
+
+/* Inline authentication feedback */
+.account-feedback {
+  max-width: 420px;
+  margin: 20px 0 -8px;
+  padding: 12px 14px;
+  border: 1px solid #d9e5d4;
+  border-radius: 3px;
+  background: #f0f5ed;
+  color: #3d6542;
+  font-size: 12px;
+  line-height: 1.6;
+}
+
+.account-feedback.error {
+  border-color: #ead2ca;
+  background: #fbefeb;
+  color: #914832;
+}
+
+/* Small toast for successful sign-in */
+.studio-toast {
+  position: fixed;
+  z-index: 1000;
+  right: 24px;
+  bottom: 24px;
+  max-width: min(360px, calc(100vw - 32px));
+  padding: 15px 20px;
+  border: 1px solid #d9e5d4;
+  border-radius: 4px;
+  background: #f7faf4;
+  color: #355e39;
+  box-shadow: 0 12px 35px rgba(41, 42, 36, 0.14);
+  font-size: 13px;
+  line-height: 1.5;
+  opacity: 0;
+  transform: translateY(10px);
+  pointer-events: none;
+  transition: opacity 220ms ease, transform 220ms ease;
+}
+
+.studio-toast.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.studio-toast.error {
+  border-color: #ead2ca;
+  background: #fbefeb;
+  color: #914832;
+}
+
+#accountForm button[type="submit"].is-loading {
+  cursor: progress;
+  opacity: 0.8;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+  }
+}
+
+@media (max-width: 600px) {
+  .studio-toast {
+    right: 16px;
+    bottom: 16px;
+  }
+}
+
+/* Slight zoom effect when hovering over a painting */
+.painting-art {
+  overflow: hidden;
+}
+
+.real-painting-image {
+  transition: transform 300ms ease;
+}
+
+.painting-card:hover .real-painting-image {
+  transform: scale(1.05);
+}
+
+/* Keep the zoom contained within the painting frame */
+.painting-art img {
+  transform-origin: center;
+}
+
+/* Light white overlay on sold paintings */
+.painting-art:has(.sold)::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(255, 255, 255, 0.35);
+  pointer-events: none;
+  z-index: 2;
+}
+
+/* Keep the SOLD label visible above the overlay */
+.painting-art .sold {
+  z-index: 3;
+}
+
+/* Subtle hover effect for the whole painting card */
+.painting-card {
+  transition: box-shadow 300ms ease;
+}
+
+.painting-card:hover {
+  box-shadow: 0 8px 24px rgba(41, 42, 36, 0.08);
+}
+
+/* Respect reduced-motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  .real-painting-image,
+  .painting-card {
+    transition: none;
+  }
+
+  .painting-card:hover .real-painting-image {
+    transform: none;
+  }
+}

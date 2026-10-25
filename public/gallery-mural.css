@@ -1,0 +1,156 @@
+.gallery-controls {
+  display: flex;
+  gap: 12px;
+  margin: 24px 0;
+  flex-wrap: wrap;
+}
+
+.gallery-controls input,
+.gallery-controls select {
+  padding: 12px 14px;
+  border: 1px solid #d8d0c6;
+  border-radius: 6px;
+  background: #fff;
+  color: #333;
+  font-family: inherit;
+  font-size: 14px;
+}
+
+.gallery-controls input {
+  flex: 1;
+  min-width: 220px;
+}
+
+.gallery-controls select {
+  min-width: 190px;
+}
+
+.gallery-controls input:focus,
+.gallery-controls select:focus {
+  outline: 2px solid #b58b64;
+  outline-offset: 2px;
+}
+
+@media (max-width: 600px) {
+  .gallery-controls {
+    flex-direction: column;
+  }
+
+  .gallery-controls input,
+  .gallery-controls select {
+    width: 100%;
+    box-sizing: border-box;
+  }
+}
+
+/* Separate wall painting bookings page */
+.mural-intro {
+  max-width: 560px;
+}
+
+.mural-subheading {
+  margin-top: 45px !important;
+  margin-bottom: 18px !important;
+}
+
+.mural-form {
+  margin: 28px 0;
+  padding: 24px;
+  background: #fff;
+  border: 1px solid #e9e6df;
+  display: grid;
+  gap: 16px;
+}
+
+.mural-form h3 {
+  margin: 0;
+  font: 24px 'Playfair Display', Georgia, serif;
+}
+
+.mural-form label {
+  display: grid;
+  gap: 8px;
+  font-size: 12px;
+  color: #65645c;
+}
+
+.mural-form input,
+.mural-form textarea {
+  width: 100%;
+  padding: 13px;
+  border: 1px solid #dcd9d0;
+  background: #fff;
+  font: inherit;
+  color: #292a24;
+  resize: vertical;
+}
+
+.mural-price {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.mural-booking {
+  padding: 20px 0;
+  border-bottom: 1px solid #e1ded7;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.mural-booking h3 {
+  margin: 0 0 10px;
+  font: 22px 'Playfair Display', Georgia, serif;
+}
+
+.mural-booking p {
+  margin: 6px 0;
+  color: #77766e;
+  font-size: 12px;
+  overflow-wrap: anywhere;
+}
+
+.mural-booking .order-status {
+  color: #a6684a;
+  font-size: 10px;
+}
+
+.mural-actions {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.mural-actions button,
+.mural-form button {
+  cursor: pointer;
+}
+
+.mural-actions button {
+  border: 1px solid #d9d7cf;
+  background: #fff;
+  padding: 10px 13px;
+}
+
+.text-button {
+  border: 0;
+  background: none;
+  padding: 0;
+  color: #895b42;
+  text-decoration: underline;
+  cursor: pointer;
+  font: inherit;
+}
+
+@media (max-width: 600px) {
+  .mural-form {
+    padding: 17px;
+  }
+
+  .mural-booking {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+}

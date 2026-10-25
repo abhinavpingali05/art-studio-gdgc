@@ -1,0 +1,109 @@
+/* Bigger, more interactive header navigation */
+.header nav {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.header nav button {
+  position: relative;
+  padding: 12px 16px;
+  min-height: 42px;
+  border: 1px solid transparent;
+  border-radius: 6px;
+  background: transparent;
+  color: #504d45;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.2px;
+  transition:
+    background-color 200ms ease,
+    color 200ms ease,
+    border-color 200ms ease,
+    transform 200ms ease,
+    box-shadow 200ms ease;
+}
+
+/* Hover effect */
+.header nav button:hover:not(:disabled) {
+  background: #eee8df;
+  color: #995e40;
+  border-color: #e5d6c8;
+  transform: translateY(-2px);
+}
+
+/* Click feedback */
+.header nav button:active:not(:disabled) {
+  transform: translateY(0) scale(0.97);
+  background: #e6d8ca;
+}
+
+/* Keyboard accessibility */
+.header nav button:focus-visible {
+  outline: 2px solid #a6684a;
+  outline-offset: 3px;
+}
+
+/* Main navigation action */
+.header nav .nav-button {
+  min-height: 44px;
+  padding: 12px 20px;
+  border: 1px solid #292a24;
+  border-radius: 6px;
+  background: #292a24;
+  color: #fff;
+  font-weight: 600;
+  box-shadow: 0 3px 0 rgba(41, 42, 36, 0.08);
+}
+
+.header nav .nav-button:hover:not(:disabled) {
+  background: #a6684a;
+  border-color: #a6684a;
+  color: #fff;
+  box-shadow: 0 5px 14px rgba(93, 59, 40, 0.16);
+  transform: translateY(-2px);
+}
+
+.header nav .nav-button:active:not(:disabled) {
+  transform: translateY(0) scale(0.97);
+}
+
+/* Mobile navigation */
+@media (max-width: 700px) {
+  .header {
+    padding: 12px 5%;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+
+  .header nav {
+    width: 100%;
+    gap: 6px;
+    justify-content: flex-start;
+  }
+
+  .header nav button {
+    min-height: 42px;
+    padding: 10px 12px;
+    font-size: 12px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .header nav button {
+    transition: none;
+  }
+}
+
+.header nav button {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  letter-spacing: normal;
+}
+
+.header nav .nav-button {
+  font-weight: 400;
+}
